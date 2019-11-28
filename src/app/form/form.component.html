@@ -1,0 +1,218 @@
+<div class="container my-2">
+    <div class="row">
+        <!-- {{formInfo.value|json}} -->
+        <div class="col-md-8 mt-4">
+            <form (ngSubmit)='onSubmit(formInfo);' #formInfo="ngForm" name="formInfo">
+                <div class="form-row">
+                    <h3 class="pl-1">Billing Address</h3>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" ngModel #firstName="ngModel" [ngClass]="{'is-invalid':firstName.touched && firstName.errors?.required || firstName.errors?.minlength }" name="firstName" minlength="3" required>
+                        <div class="invalid-feedback" *ngIf="!firstName.errors?.minlength">
+                            Please provide a first name.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="firstName.errors?.minlength">
+                            Please provide at least 3 characters.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" ngModel #lastName="ngModel" [ngClass]="{'is-invalid':lastName.touched && lastName.errors?.required || lastName.errors?.minlength }" name="lastName" minlength="3" required>
+                        <div class="invalid-feedback" *ngIf="!lastName.errors?.minlength">
+                            Please provide a last name.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="lastName.errors?.minlength">
+                            Please provide at least 3 characters.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inlineFormInputGroup">Username</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" ngModel #userName="ngModel" [ngClass]="{'is-invalid':userName.touched && userName.errors?.required }" name="userName" required>
+                        <div class="invalid-feedback">
+                            Please provide a username.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span class="text-secondary"> (Optional)</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="you@gmail.com" ngModel #email='ngModel' name="email" email [ngClass]="{'is-invalid':email.touched && email.errors?.email }">
+                        <div class="invalid-feedback">
+                            Email is not valid.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Address</label>
+                        <input type="text" class="form-control" id="address1" placeholder="1234 Main St" ngModel #address="ngModel" name="address" [ngClass]="{'is-invalid':address.touched && address.errors?.required }" required>
+                        <div class="invalid-feedback">
+                            Please provide a address.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2<span class="text-secondary"> (Optional)</span></label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" ngModel name='address2'>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Country</label>
+                            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ngModel #country="ngModel" name="country" [ngClass]="{'is-invalid':country.touched && country.errors?.required }" required>
+                                <option selected disabled>Choose one</option>
+                                <option value="vn">VietNam</option>
+                                <option value="kr">Korea</option>
+                                <option value="por">Porturgal</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a valid country.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="inputState" class="form-control" ngModel #state="ngModel" name="state" [ngClass]="{'is-invalid':state.touched && state.errors?.required }" required>
+                                <option selected disabled>Choose...</option>
+                                <option value="bd">Binh Duong</option>
+                                <option value="hu">Hue</option>
+                                <option value="qc">Quan Cam</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please choose a valid state.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="inputZip" ngModel #zip="ngModel" name="zip" [ngClass]="{'is-invalid':zip.touched && zip.errors?.required }" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr my-1>
+
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" ngModel name="shipping">
+                        <label class="custom-control-label" for="customCheck1">Shipping address is in the same as my
+                            billing address</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2" ngModel name="saveInfo">
+                        <label class="custom-control-label" for="customCheck2">Save this information for next
+                            time</label>
+                    </div>
+                </div>
+
+                <hr my-1>
+
+                <div class="form-row">
+                    <h3 class="pl-1">Payment</h3>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name='methodPay' class="custom-control-input" ngModel value="1" required>
+                        <label class="custom-control-label" for="customRadio1">Credit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio2" name="methodPay" class="custom-control-input" ngModel value="2" required>
+                        <label class="custom-control-label" for="customRadio2">Debit card</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio3" name="methodPay" class="custom-control-input" ngModel value="3" required>
+                        <label class="custom-control-label" for="customRadio3">Paypal</label>
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nameOnCard">Name on card</label>
+                        <input type="text" class="form-control" id="nameOnCard" ngModel #nameOnCard="ngModel" name="nameOnCard" [ngClass]="{'is-invalid':nameOnCard.touched && nameOnCard.errors?.required }" required>
+                        <small class="form-text text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Please provide a valid name on card.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="credit">Credit card number</label>
+                        <input type="text" class="form-control" id="credit" ngModel #credit="ngModel" name="credit" [ngClass]="{'is-invalid':credit.touched && credit.errors?.required }" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid credit card number.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="expiration">Expiration</label>
+                        <input type="text" class="form-control" id="expiration" ngModel #expiration="ngModel" name="expiration" [ngClass]="{'is-invalid':expiration.touched && expiration.errors?.required }" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid expiration.
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" ngModel #cvv="ngModel" name="cvv" [ngClass]="{'is-invalid':cvv.touched && cvv.errors?.required }" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid CVV.
+                        </div>
+                    </div>
+                </div>
+                <hr my-1>
+                <button type="submit" class="btn btn-primary w-100" [disabled]="formInfo.invalid">Continue to
+                    checkout</button>
+            </form>
+        </div>
+        <div class="col-md-4 mt-4">
+            <h3 class="text-secondary d-flex justify-content-between"><span>Your cart</span> <span class="badge badge-pill badge-secondary">3</span></h3>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        <h6 class="m-0">Product Name</h6>
+                        <p class="m-0 text-secondary">Brief description</p>
+                    </span>
+                    <span>30$</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        <h6 class="m-0">Second Product</h6>
+                        <p class="m-0 text-secondary">Brief description</p>
+                    </span>
+                    <span>8$</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        <h6 class="m-0">Third Item</h6>
+                        <p class="m-0 text-secondary">Brief description</p>
+                    </span>
+                    <span>5$</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <span>
+                        <h6 class="m-0 text-success">Product Name</h6>
+                        <p class="m-0 text-success">Brief description</p>
+                    </span>
+                    <span class="text-success">30$</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                        <h6 class="m-0">Total(USD)</h6>
+                    </span>
+                    <span class="font-weight-bold">30$</span>
+                </li>
+            </ul>
+            <div class="border border-white my-2 p-2 bg-white">
+                <div class="input-group">
+                    <input type=" text " class="form-control " placeholder="Promo code ">
+                    <div class="input-group-append ">
+                        <button class="btn btn-secondary " type="button" id="button-addon2">Redeem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-5">
+</div>
+<app-data-table (editClick)="passForm(formInfo)"></app-data-table>
